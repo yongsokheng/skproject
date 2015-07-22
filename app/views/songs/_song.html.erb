@@ -1,0 +1,8 @@
+<tr class="song-<%= song_counter %>">
+  <td width="50%"><%= image_tag "active", class: "playing" %> &nbsp; &nbsp; &nbsp;<%= song.title %></td>
+  <td width="30%"><%= song.artist %></td>
+  <td width="5%"><%= link_to "", "", class: "glyphicon glyphicon-save", title: "Download" %></td>
+  <td width="5%"><%= link_to "", "", class: "glyphicon glyphicon-share-alt", title: "Share" %></td>
+  <td width="5%"><%= link_to "", "", class: "glyphicon glyphicon-plus-sign", title: "Add to favorite" %></td>
+  <td width="5%"><%= link_to "", "", class: "glyphicon glyphicon-headphones", title: "Listen in new window" %></td>
+</tr>

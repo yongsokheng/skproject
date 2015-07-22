@@ -1,0 +1,66 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body{
+  background-color: #F9F9F9;
+}
+.header{
+  margin-bottom: 60px;
+}
+a{
+  color: #666363;
+}
+a:hover{
+  text-decoration: none;
+}
+/** Navbar **/
+.navbar-default{
+  background-color: WHITE;
+  border-color: #DBD8D8;
+  color: BLACK;
+}
+
+.navbar-default .navbar-brand{
+  margin-top: -11px;
+}
+
+.navbar-default .navbar-nav>li>a{ 
+  color: BLACK;
+  font-weight: bold;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus{ 
+  color: #F95300;
+}
+/** End Navbar **/
+
+/** Form **/
+
+/** End form **/
+
+/** album-box **/
+.thumbnail{
+  -moz-box-shadow:    0px 3px 5px 0px #ccc;
+  -webkit-box-shadow: 0px 3px 5px 0px #ccc;
+  box-shadow:         0px 3px 5px 0px #ccc;
+  padding-top: 10px;
+}
+
+.btn-play{
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  display: none;
+}
+
+.thumbnail:hover .btn-play{display:block;}
+.thumbnail:hover .album-image{opacity: 0.5;}
+.thumbnail:hover{
+  cursor: pointer;
+}
+
+.btn-action{
+  margin: 0px 3px 0px 3px;
+}
+
+/** End album-box **/
