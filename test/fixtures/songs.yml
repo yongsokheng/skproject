@@ -2,12 +2,20 @@
 
 one:
   title: MyString
-  artist: MyString
+  lyric: MyString
+  view: 1
   url: MyString
   image: MyString
+  album_id: 
+  country_id: 
+  production_image_id: 
 
 two:
   title: MyString
-  artist: MyString
+  lyric: MyString
+  view: 1
   url: MyString
   image: MyString
+  album_id: 
+  country_id: 
+  production_image_id: 

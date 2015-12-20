@@ -1,10 +1,20 @@
-Song.create! title: "Krav pi yum", artist: "Preab Sovath", url: "/audios/a.mp3",
-  image: "1.jpg"
-Song.create! title: "Kam kor koch chet", artist: "Preab Sovath", url: "/audios/b.mp3",
-  image: "2.png"
-Song.create! title: "English", artist: "Preab Sovath", url: "/audios/c.mp3",
-  image: "3.png"
-Song.create! title: "English", artist: "Preab Sovath", url: "/audios/d.mp3",
-  image: "1.jpg"
-Song.create! title: "English", artist: "Preab Sovath", url: "/audios/e.mp3",
-  image: "2.png"
+# 5.times do
+#   album = FactoryGirl.create :album
+#   10.times do
+#     FactoryGirl.create :song, en_title: Faker::Lorem.word,
+#       kh_title: Faker::Lorem.word,
+#       lyric: Faker::Lorem.paragraph,
+#       album: album
+#   end
+# end
+
+# 2.times do
+#   song = Song.first
+#   FactoryGirl.create :song_artist, song: song
+# end
+
+User.create! username: "admin", email: "admin@gmail.com", password: "12345678",
+  password_confirmation: "12345678", admin: true
+
+User.create! username: "user1", email: "user1@gmail.com", password: "12345678",
+  password_confirmation: "12345678"

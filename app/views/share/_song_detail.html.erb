@@ -1,0 +1,11 @@
+<div class="row album-detail">
+  <div class="col-md-2">
+    <%= image_tag @song.image.url, class: "img-responsive" %>
+  </div>
+  <div class="col-md-4">
+    <h4 class="media-heading"><%= @song.kh_title %></h4>
+    <p><%= link_to @song.album.kh_name, @song.album %></p>
+    <p><%= get_artist_with_link(@song).html_safe %></p>
+    <p><%= render "share/social_share" %></p>
+  </div>
+</div>

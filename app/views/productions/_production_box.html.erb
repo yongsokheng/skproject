@@ -1,0 +1,11 @@
+<%= link_to production, class: "production_box" do %>
+  <div class="col-md-3">
+    <div class="thumbnail">
+      <%= image_tag production.image.url, class: "album-image" %>
+      <div class="btn-play"><%= image_tag "play" %></div>
+      <div class="caption">
+        <h5><%= production.kh_name %></h5>
+      </div>
+    </div>
+  </div>
+<% end %>

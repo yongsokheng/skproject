@@ -1,45 +1,183 @@
-$(document).on("ready", function(){
-  if($(".songs").length > 0){
-    var playlist = $('.table-songs tr');
-    var songs = JSON.parse($(".songs").text());
-    var total = songs.length;
-    var current = 0;
-    var repeat_album = false;
-    var repeat_song = false;
-    var timer;
+var timer;
+var songs;
+var total;
+var current;
+var repeat_album;
+var repeat_all;
+var repeat_one;
+var domain;
+var audio;
+var volume;
 
-    $(function(){
-      $('#audio-player').mediaelementplayer({
-        alwaysShowControls: true,
-        features: ['playpause','progress','volume', 'duration', 'current'],
-        audioVolume: 'horizontal',
-        audioWidth: 450,
-        audioHeight: 70,
-        iPadUseNativeControls: true,
-        iPhoneUseNativeControls: true,
-        AndroidUseNativeControls: true,
-      });
-    });
+function loadLocalStorage() {
+  // Check browser support
+  if (typeof(Storage) !== "undefined") {
+    if(localStorage.getItem("repeat_album") === null) {
+      localStorage.repeat_album = true;
+      localStorage.repeat_one = false;
+      localStorage.repeat_all = false;
+      localStorage.volume = 0.5;
+    }
+    repeat_album = (localStorage.repeat_album == "true") // convert string to boolean
+    repeat_one = (localStorage.repeat_one == "true")
+    repeat_all = (localStorage.repeat_all == "true")
+    volume = parseFloat(localStorage.volume);
+  } else {
+    console.log("Sorry, your browser does not support Web Storage...");
+  }
+}
 
-    // $(".table-songs").find("tr:first").addClass("current-song");
-    // $(".table-songs").find("tr:first").find(".playing").css({"visibility": "visible"});;
+function loadTrackRepeatStatus() {
+  if(repeat_album){
+    $(".btn-repeat-song").css({"background-image": "url(/assets/icon/repeat_album.png)"});
+  }else if(repeat_one) {
+    $(".btn-repeat-song").css({"background-image": "url(/assets/icon/repeat_one.png)"});
+  }else if(repeat_all) {
+    $(".btn-repeat-song").css({"background-image": "url(/assets/icon/repeat_all.png)"});
+  }
+}
 
+function scrollTo(position) {
+  $(".playlist").mCustomScrollbar("scrollTo", position, {
+    scrollEasing:"linear",
+    scrollInertia:200
+  });
+}
 
-    var audio = document.getElementById('audio-player');
-    audio.addEventListener('ended', function(){
-      if(repeat_song){
-        loadSong(current);
+function scrollNext(id) {
+  var top = $("#song-"+id).offset().top - $(".playlist").offset().top;
+  if(top >= 150) {
+    if(id == total - 1) {
+      scrollTo("top");
+    }else {
+      scrollTo("-=200");
+    }
+  }
+}
+
+function checkPlayerType(total) {
+  if(total == 1) {
+    $(".btn-next").hide();
+    $(".btn-prev").hide();
+  }
+}
+
+function scrollPrev(id) {
+  var top = $("#song-"+id).offset().top - $(".playlist").offset().top;
+  if(top < 38) {
+    if(id == 0) {
+      scrollTo("bottom");
+    }else {
+      scrollTo("+=200");
+    }
+  }
+}
+
+function loadSong(id) {
+  var playlist = $("#song-"+id);
+  var song_id = playlist.data("id");
+  var url = playlist.data("url");
+  var artist = playlist.data("artist");
+  var kh_title = playlist.data("khtitle");
+  var lyric = playlist.data("lyric");
+  var promotion_text = "";
+  var bg_image = playlist.data("bg-image");
+  var promotion_image = playlist.data("promotion-image");
+  var promotion_link = playlist.data("promotion-link")
+  clearInterval(timer);
+
+  $.get( "/update_number/play/"+song_id);
+
+  $(".audio-player").css({"background-image": "url("+ bg_image +")"});
+
+  if(!playlist.hasClass("active-playing")) {
+    $(".table-songs .active-playing").removeClass();
+    playlist.addClass("active-playing");
+  }
+
+  $(".audio-title").html(kh_title);
+  $(".audio-artist").html(artist);
+
+  if(lyric === "")
+    $(".lyric").html("No Lyric");
+  else
+    $(".lyric").html(lyric);
+
+  // $(".bg-img").css({"display": "none", "background": "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(""+domain+"/assets/1.jpg")"});
+  // $(".bg-img").fadeIn(600);
+
+  if(promotion_image === ""){
+    $(".promotion-img").hide();
+    $(".btn-close").hide();
+    $(".btn-show-promotion").hide();
+  }else{
+    $(".promotion-img").show();
+    $(".promotion-img").css({"background-image": "url("+ promotion_image +")"}).html("<span class='label label-primary timer'>10s</span>");
+    $(".promotion-img").show();
+    $(".btn-close").show();
+    $(".btn-show-promotion").hide();
+
+    var sec = 10;
+    timer = setInterval(function(){
+      $(".timer").html(--sec+"s");
+      if (sec == 0) {
+        clearInterval(timer);
+        $(".promotion-img").fadeOut(300);
+        $(".btn-close").hide();
+        $(".btn-show-promotion").show();
       }
-      else if(current < total - 1 || repeat_album)
-        $(".btn-next").trigger("click");
+    }, 1000);
+
+    $(".promotion-img").on("click", function(){
+      if(promotion_link !== "") {
+        window.open(promotion_link, '_blank');
+      }
     });
-    
-    playlist.click(function(){
+  }
+
+  audio.pause();
+  audio.setSrc(url);
+  audio.play();
+}
+
+$(document).ready(function(){
+
+  if($(".player").length > 0){
+    loadLocalStorage();
+    loadTrackRepeatStatus();
+
+    audio = new MediaElementPlayer("#audio-player");
+    audio.setVolume(volume);
+
+    loadSong(0);
+
+    total = parseInt($(".audio-player").data("total"));
+    current = 0;
+
+    checkPlayerType(total);
+
+    $(".row-song").click(function(){
       current = parseInt($(this).index());
       loadSong(current);
     });
 
+    $("#audio-player").bind("ended", function(e) {
+      if(repeat_one){
+        loadSong(current);
+      }else if(current < total - 1 || repeat_album)
+        $(".btn-next").trigger("click");
+      else {
+        audio.play();
+        audio.pause();
+      }
+    });
+
+    $("#audio-player").bind("volumechange", function(e) {
+      localStorage.volume = e.target.volume;
+    });
+
     $(".btn-next").on("click", function(){
+      scrollNext(current);
       if(current < total - 1)
         current++;
       else
@@ -48,66 +186,13 @@ $(document).on("ready", function(){
     });
 
     $(".btn-prev").on("click", function(){
+      scrollPrev(current);
       if(current > 0)
         current--;
       else
         current = total - 1;
       loadSong(current);
     });
-
-    $(".btn-repeat-song").on("click", function(){
-      if(repeat_song){
-        repeat_song = false;
-        $(this).css({"color": "#848484"});
-      }
-      else{
-        repeat_song = true;
-        $(this).css({"color": "WHITE"});
-        repeat_album = false;
-        $(".btn-repeat-album").css({"color": "#848484"});
-      }
-    });
-
-    $(".btn-repeat-album").on("click", function(){
-      if(repeat_album){
-        repeat_album = false;
-        $(this).css({"color": "#848484"});
-      }
-      else{
-        repeat_album = true;
-        $(this).css({"color": "WHITE"});
-        repeat_song = false;
-        $(".btn-repeat-song").css({"color": "#848484"});
-      }
-    });
-
-    function loadSong(id){
-      var url = songs[id].url
-      playlist.removeClass("current-song");
-      playlist.find(".playing").css({"visibility": "hidden"});
-      $(".table-songs").find(".song-"+id).addClass("current-song");
-      $(".table-songs").find(".song-"+id).find(".playing").css({"visibility": "visible"});
-      $(".audio-title").html(songs[id].title);
-      $(".audio-artist").html(songs[id].artist);
-      $(".bg-img").css({"display": "none", "background": "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/"+songs[id].image+"')"});
-      $(".bg-img").fadeIn(600);
-      $(".promotion-img").html("<image class='img-responsive' src='assets/back3.jpg'/><span class='label label-primary timer'>10s</span>");
-      $(".promotion-img").show();
-      $(".btn-close").show();
-      var sec = 10;
-      clearInterval(timer);
-      timer = setInterval(function(){ 
-        $(".timer").html(--sec+"s");
-        if (sec == 0) {
-          $(".promotion-img").fadeOut(300);
-          $(".btn-close").hide();
-        } 
-      }, 1000); 
-      audio.src = url;
-      audio.play();
-    }
-
-    loadSong(0);
 
     $(".btn-close").on("click", function(){
       $(".promotion-img").fadeOut(300);
@@ -119,10 +204,42 @@ $(document).on("ready", function(){
     $(".btn-show-promotion").on("click", function(){
       $(".promotion-img").fadeIn(300);
       $(".btn-close").show();
+      $(this).hide();
       clearInterval(timer);
       $(".timer").html("");
     });
 
+    $(".btn-repeat-song").on("click", function(){
+      if(repeat_album) {
+        $(".btn-repeat-song").css({"background-image": "url(/assets/icon/repeat_one.png)"});
+        repeat_one = true;
+        repeat_album = false;
+        repeat_all = false;
+        localStorage.repeat_album = false;
+        localStorage.repeat_one = true;
+        localStorage.repeat_all = false;
+      }else if(repeat_one) {
+        $(".btn-repeat-song").css({"background-image": "url(/assets/icon/repeat_all.png)"});
+        repeat_one = false;
+        repeat_album = false;
+        repeat_all = true;
+        localStorage.repeat_album = false;
+        localStorage.repeat_one = false;
+        localStorage.repeat_all = true;
+      }else if(repeat_all) {
+        $(".btn-repeat-song").css({"background-image": "url(/assets/icon/repeat_album.png)"});
+        repeat_one = false;
+        repeat_album = true;
+        repeat_all = false;
+        localStorage.repeat_album = true;
+        localStorage.repeat_one = false;
+        localStorage.repeat_all = false;
+      }
+    });
+
+    $(".btn-download").on("click", function(){
+      song_id = $(this).parents("tr").data("id");
+      $.get( "/update_number/download/"+song_id);
+    });
   }
 });
-

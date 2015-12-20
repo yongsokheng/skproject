@@ -1,0 +1,10 @@
+<div class="media album-detail">
+  <div class="media-left">
+    <%= link_to artist do %>
+      <%= image_tag artist.image.url, width: "90", class: "album-image" %>
+    <% end %>
+  </div>
+  <div class="media-body">
+    <h5 class="media-heading"><%= link_to artist.kh_name, artist %></h5>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-9 album">
+    <%= render "share/song_detail" %>
+    <%= render "share/player" %>
+    <h4>Song Lyric</h4>
+    <div class="lyric"></div>
+    <%= render "share/fb_comment_box" %>
+  </div>
+  <div class="col-md-3">
+    <h4>Similar Songs:</h4>
+    <%= render partial: "other_song", collection: @similar_songs, as: :song %>
+  </div>
+</div>

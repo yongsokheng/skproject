@@ -1,8 +1,16 @@
-<tr class="song-<%= song_counter %>">
-  <td width="50%"><%= image_tag "active", class: "playing" %> &nbsp; &nbsp; &nbsp;<%= song.title %></td>
-  <td width="30%"><%= song.artist %></td>
-  <td width="5%"><%= link_to "", "", class: "glyphicon glyphicon-save", title: "Download" %></td>
-  <td width="5%"><%= link_to "", "", class: "glyphicon glyphicon-share-alt", title: "Share" %></td>
-  <td width="5%"><%= link_to "", "", class: "glyphicon glyphicon-plus-sign", title: "Add to favorite" %></td>
-  <td width="5%"><%= link_to "", "", class: "glyphicon glyphicon-headphones", title: "Listen in new window" %></td>
+<tr id="song-<%= song_counter %>" class="row-song"
+  data-id="<%= song.id %>"
+  data-khtitle="<%= song.kh_title %>"
+  data-artist="<%= get_artist_with_link song %>"
+  data-url="<%= song.url %>"
+  data-lyric="<%= song.lyric %>"
+  data-promotion-link="<%= song.promotion_image.link if song.promotion_image %>"
+  data-bg-image="<%= song.bg_image.url %>"
+  data-promotion-image="<%= song.promotion_image.image.url if song.promotion_image %>">
+  <td width="50%" class="title"><%= "#{song_counter + 1}. #{song.kh_title}" %></td>
+  <td width="50%" class="artist"><%= get_artist_with_link(song).html_safe %></td>
+  <td width="5%"><%= link_to "", song.url, class: "glyphicon glyphicon-save btn-download",
+    title: "Download",
+    target: "_blank" %></td>
+  <td width="5%"><%= link_to "", song_path(song), class: "glyphicon glyphicon-headphones", title: "Listen in new window" if @songs.count > 1 %></td>
 </tr>

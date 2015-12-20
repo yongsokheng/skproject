@@ -1,0 +1,8 @@
+<h3>
+  <%= link_to production.kh_name, production %>
+</h3>
+<hr>
+<div class="row">
+  <% @albums = production.albums.latest 4 %>
+  <%= render @albums %>
+</div>

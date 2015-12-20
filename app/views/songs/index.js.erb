@@ -1,0 +1,20 @@
+<% if @songs.count > 0 %>
+  $(".song-auto-result").show();
+  $(".auto-song").html("<%= j render partial: 'share/song_autocomplete', collection: @songs %>");
+<% else %>
+  $(".song-auto-result").hide();
+<% end %>
+
+<% if @artists.count > 0 %>
+  $(".artist-auto-result").show();
+  $(".auto-artist").html("<%= j render partial: 'share/artist_autocomplete', collection: @artists %>");
+<% else %>
+  $(".artist-auto-result").hide();
+<% end %>
+
+<% if @albums.count > 0 %>
+  $(".album-auto-result").show();
+  $(".auto-album").html("<%= j render partial: 'share/album_autocomplete', collection: @albums %>");
+<% else %>
+  $(".album-auto-result").hide();
+<% end %>
