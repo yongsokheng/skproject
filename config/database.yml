@@ -14,7 +14,7 @@ default: &default
   encoding: utf8
   pool: 5
   username: root
-  password: 1234
+  password: yongsokhengcambodia
   socket: /var/run/mysqld/mysqld.sock
 
 development:
@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: music_pro_production
-  username: music_pro
-  password: <%= ENV['MUSIC_PRO_DATABASE_PASSWORD'] %>
+  username: root
+  password: yongsokhengcambodia
