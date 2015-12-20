@@ -9,7 +9,6 @@ class Album < ActiveRecord::Base
   validates :image, presence: true
   validates :kh_name, presence: true
   validates :production_id, presence: true
-  validates :year, presence: true, numericality: {greater_than: 0}
 
   scope :find_all_except, ->id, limit{where.not(id: id).limit(limit)}
   scope :latest, ->limit{order(en_name: :DESC).limit(limit)}
