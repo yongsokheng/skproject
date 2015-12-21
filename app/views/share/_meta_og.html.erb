@@ -1,0 +1,24 @@
+<%
+  if "albums" == controller.controller_name
+    title = @album.kh_name if @album
+    description = @album.production.kh_name if @album
+    image = @album.image.url if @album
+  elsif "artists" == controller.controller_name
+    title = @artist.kh_name if @artist
+    image = @artist.image.url if @artist
+  elsif "songs" == controller.controller_name
+    title == @song.kh_title if @song
+    description = "#{@song.album.production.kh_name} #{@song.album.kh_name}" if @song
+    image = @song.image.url if @song
+  end
+%>
+<meta property="og:title" content= "<%= title %>" />
+<meta property="og:description" content= "<%= description %>" />
+<meta property="og:image" content= "<%= image %>" />
+<meta property="og:url" content= "<%= request.original_url %>" />
+
+<!-- twitter card meta -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<%= title %>">
+<meta name="twitter:description" content="<%= description %>">
+<meta name="twitter:image:src" content="<%= image %>">

@@ -110,23 +110,29 @@
   height: 20px;
 }
 
-.audio-title{
-  position: absolute;
-  top: 20px;
-  left: 30px;
+.audio-title {
+  position: relative;
+  margin: 20px 20px 10px 20px;
   color: WHITE;
   font-size: 1.5em;
   z-index: 1;
 }
 
-.audio-artist{
-  position: absolute;
-  top: 55px;
-  left: 30px;
+.audio-play-number {
+  position: relative;
+  margin-left: 20px;
   color: #C6C3C3;
   font-size: 1em;
   z-index: 1;
-  padding-top: 10px;
+  color: WHITE;
+}
+
+.audio-artist {
+  position: relative;
+  margin-left: 20px;
+  color: #C6C3C3;
+  font-size: 1em;
+  z-index: 1;
 
   a {
     color: WHITE;
