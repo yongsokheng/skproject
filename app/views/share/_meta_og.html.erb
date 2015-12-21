@@ -7,7 +7,7 @@
     title = @artist.kh_name if @artist
     image = @artist.image.url if @artist
   elsif "songs" == controller.controller_name
-    title == @song.kh_title if @song
+    title = @song.kh_title if @song
     description = "#{@song.album.production.kh_name} #{@song.album.kh_name}" if @song
     image = @song.image.url if @song
   end
