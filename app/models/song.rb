@@ -9,10 +9,10 @@ class Song < ActiveRecord::Base
   belongs_to :promotion_image
   belongs_to :user
 
-  has_many :song_artists
+  has_many :song_artists, dependent: :destroy
   has_many :artists, through: :song_artists
 
-  has_many :song_types
+  has_many :song_types, dependent: :destroy
   has_many :types, through: :song_types
 
   validates :artists, presence: true
