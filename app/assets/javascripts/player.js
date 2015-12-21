@@ -30,10 +30,13 @@ function loadLocalStorage() {
 function loadTrackRepeatStatus() {
   if(repeat_album){
     $(".btn-repeat-song").css({"background-image": "url(/assets/icon/repeat_album.png)"});
+    $(".btn-repeat-song").attr("title", "Repeat album");
   }else if(repeat_one) {
     $(".btn-repeat-song").css({"background-image": "url(/assets/icon/repeat_one.png)"});
+    $(".btn-repeat-song").attr("title", "Repeat one");
   }else if(repeat_all) {
     $(".btn-repeat-song").css({"background-image": "url(/assets/icon/repeat_all.png)"});
+    $(".btn-repeat-song").attr("title", "Repeat album once");
   }
 }
 
@@ -79,6 +82,7 @@ function loadSong(id) {
   var url = playlist.data("url");
   var artist = playlist.data("artist");
   var kh_title = playlist.data("khtitle");
+  var play_number = playlist.attr("data-play-number");
   var lyric = playlist.data("lyric");
   var promotion_text = "";
   var bg_image = playlist.data("bg-image");
@@ -86,7 +90,9 @@ function loadSong(id) {
   var promotion_link = playlist.data("promotion-link")
   clearInterval(timer);
 
-  $.get( "/update_number/play/"+song_id);
+  audio.pause();
+  audio.setSrc(url);
+  audio.play();
 
   $(".audio-player").css({"background-image": "url("+ bg_image +")"});
 
@@ -97,6 +103,9 @@ function loadSong(id) {
 
   $(".audio-title").html(kh_title);
   $(".audio-artist").html(artist);
+  $(".audio-play-number").html("<i class='fa fa-headphones'></i> "
+    + Number(play_number).toLocaleString('en'));
+  playlist.attr("data-play-number", parseInt(play_number) + 1);
 
   if(lyric === "")
     $(".lyric").html("No Lyric");
@@ -135,9 +144,7 @@ function loadSong(id) {
     });
   }
 
-  audio.pause();
-  audio.setSrc(url);
-  audio.play();
+  $.get( "/update_number/play/"+song_id);
 }
 
 $(document).ready(function(){
@@ -211,7 +218,8 @@ $(document).ready(function(){
 
     $(".btn-repeat-song").on("click", function(){
       if(repeat_album) {
-        $(".btn-repeat-song").css({"background-image": "url(/assets/icon/repeat_one.png)"});
+        $(this).css({"background-image": "url(/assets/icon/repeat_one.png)"});
+        $(this).attr("title", "Repeat one");
         repeat_one = true;
         repeat_album = false;
         repeat_all = false;
@@ -219,7 +227,8 @@ $(document).ready(function(){
         localStorage.repeat_one = true;
         localStorage.repeat_all = false;
       }else if(repeat_one) {
-        $(".btn-repeat-song").css({"background-image": "url(/assets/icon/repeat_all.png)"});
+        $(this).css({"background-image": "url(/assets/icon/repeat_all.png)"});
+        $(this).attr("title", "Repeat album once");
         repeat_one = false;
         repeat_album = false;
         repeat_all = true;
@@ -227,7 +236,8 @@ $(document).ready(function(){
         localStorage.repeat_one = false;
         localStorage.repeat_all = true;
       }else if(repeat_all) {
-        $(".btn-repeat-song").css({"background-image": "url(/assets/icon/repeat_album.png)"});
+        $(this).css({"background-image": "url(/assets/icon/repeat_album.png)"});
+        $(this).attr("title", "Repeat album");
         repeat_one = false;
         repeat_album = true;
         repeat_all = false;
