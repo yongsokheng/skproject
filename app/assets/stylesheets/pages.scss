@@ -192,21 +192,10 @@ a:hover{
   border-bottom: 1px solid #F0F0F0;
 
   .song-result {
-    .artist, .album {
-      color: #aaa;
+    .artist, .album, .play-number {
+      color: #666363;
     }
-  }
 
- .action-btn {
-    position: relative;
-    top: 50px;
-    right: 0px;
-    padding-right: 0px;
-    .btn {
-      font-size: 1.5em;
-      padding-right: 5px;
-      float: right;
-    }
   }
 }
 

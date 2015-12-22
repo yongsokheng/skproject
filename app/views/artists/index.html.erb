@@ -1,8 +1,12 @@
+<%= provide :title, t("labels.artists") %>
 <div class="row">
   <div class="col-md-9">
-    <h3>Singers</h3>
+    <h3><%= t "labels.artists" %></h3>
     <div class="row">
       <%= render partial: "singer", collection: @artists, as: :artist %>
+    </div>
+    <div class="paginate">
+      <%= paginate_page @artists %>
     </div>
   </div>
 </div>

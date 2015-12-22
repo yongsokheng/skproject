@@ -7,8 +7,11 @@
 
   <div class="col-md-10 song-result">
     <h4 class="title"><%= link_to song.kh_title, song %></h4>
-    <p class="album"><%= link_to song.album.kh_name, song.album %></p>
-    <p class="artist"><%= get_artist_with_link(song).html_safe %></p>
+    <p class="album"><%= link_to song.album.kh_name, song.album %> | <%= get_artist_with_link(song).html_safe %></p>
+    <p class="play-number">
+      <i class="fa fa-headphones"></i> <%= number_with_precision 12345678, precision: 0,
+        delimiter: "," %>
+    </p>
     <p><span class="fb-like" data-href="<%= song_url(song.id) %>" data-width="100%" data-layout="  button_count" data-action="like" data-show-faces="false" data-share="true"></span>
     <span></p>
   </div>

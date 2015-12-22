@@ -1,9 +1,13 @@
+<%= provide :title, @production.kh_name %>
 <div class="row">
   <div class="col-md-9">
     <h3><%= @production.kh_name %></h3>
     <hr>
     <div class="row">
       <%= render @albums %>
+    </div>
+    <div class="paginate">
+      <%= paginate_page @albums %>
     </div>
   </div>
 </div>

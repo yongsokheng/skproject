@@ -1,6 +1,6 @@
 class SongsController < ApplicationController
   def index
-    @result = Song.ransack(params[:q]).result
+    @result = Song.ransack(params[:q]).result.page(params[:page])
   end
 
   def show
@@ -19,7 +19,7 @@ class SongsController < ApplicationController
 
   def top_song
     @result = Song.top_song 20
-    render :index
+    render :top
   end
 
   def update_number

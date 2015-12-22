@@ -1,10 +1,7 @@
-<%= provide :title, t("labels.search") %>
+<%= provide :title, t("labels.top") %>
 <div class="row">
   <div class="col-md-9">
     <%= render partial: "share/search_result", collection: @result, as: :song %>
-    <div class="paginate">
-      <%= paginate_page @result %>
-    </div>
   </div>
   <div class="col-md-3">
 
