@@ -103,7 +103,7 @@ function loadSong(id) {
 
   $(".audio-title").html(kh_title);
   $(".audio-artist").html(artist);
-  $(".audio-play-number").html("<i class='fa fa-headphones'></i> "
+  $(".audio-play-number").html("<span class='glyphicon glyphicon-headphones'></span> "
     + Number(play_number).toLocaleString('en'));
   playlist.attr("data-play-number", parseInt(play_number) + 1);
 
