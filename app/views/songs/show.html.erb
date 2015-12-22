@@ -1,3 +1,4 @@
+<%= provide :title, @song.kh_title %>
 <div class="row">
   <div class="col-md-9 album">
     <%= render "share/song_detail" %>
@@ -5,7 +6,7 @@
     <%= render "share/fb_comment_box" %>
   </div>
   <div class="col-md-3">
-    <h4>Similar Songs:</h4>
+    <h4><%= t "labels.other_songs" %></h4>
     <%= render partial: "other_song", collection: @similar_songs, as: :song %>
   </div>
 </div>

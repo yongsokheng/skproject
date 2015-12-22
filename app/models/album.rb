@@ -1,5 +1,7 @@
 class Album < ActiveRecord::Base
   include RailsAdminAlbum
+  paginates_per Settings.pagination.per_page
+
   mount_uploader :image, CoverImageUploader
 
   belongs_to :production

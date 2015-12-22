@@ -1,5 +1,7 @@
 class Production < ActiveRecord::Base
   include RailsAdminProduction
+  paginates_per Settings.pagination.per_page
+
   mount_uploader :image, CoverImageUploader
 
   has_many :albums

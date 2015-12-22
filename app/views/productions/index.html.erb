@@ -1,9 +1,13 @@
+<%= provide :title, t("labels.productions") %>
 <div class="row">
   <div class="col-md-9">
-    <h3>Productions</h3>
+    <h3><%= t "labels.productions" %></h3>
     <hr>
     <div class="row">
       <%= render partial: "production_box", collection: @productions, as: :production %>
+    </div>
+    <div class="paginate">
+      <%= paginate_page @productions %>
     </div>
   </div>
 </div>

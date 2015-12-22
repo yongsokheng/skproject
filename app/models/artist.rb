@@ -1,5 +1,7 @@
 class Artist < ActiveRecord::Base
   include RailsAdminArtist
+  paginates_per Settings.pagination.per_page
+
   mount_uploader :image, CoverImageUploader
 
   has_many :song_artists

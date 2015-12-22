@@ -1,5 +1,6 @@
 class Song < ActiveRecord::Base
   include RailsAdminSong
+  paginates_per Settings.pagination.per_page
 
   mount_uploader :image, CoverImageUploader
   mount_uploader :bg_image, BannerImageUploader

@@ -14,8 +14,8 @@
     <span class="fb-like" data-href="<%= song_url(song.id) %>" data-width="100%" data-layout="  button_count" data-action="like" data-show-faces="false" data-share="true"></span>
     <span>
   </td>
-  <td width="5%"><%= link_to "", song_path(song), class: "glyphicon glyphicon-headphones", title: "Listen in new window" if @songs.count > 1 %></td>
+  <td width="5%"><%= link_to "", song_path(song), class: "glyphicon glyphicon-headphones", title: t("labels.listen") if @songs.count > 1 %></td>
   <td width="5%"><%= link_to "", song.url, class: "glyphicon glyphicon-save btn-download",
-    title: "Download",
+    title: t("labels.download"),
     target: "_blank" %></td>
 </tr>
