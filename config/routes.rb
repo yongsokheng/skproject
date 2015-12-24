@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   get "search" => "songs#search"
   get "update_number/:type/:id" => "songs#update_number"
   get "top" => "songs#top_song", as: :top
+  get "right_ads" => "pages#right_ads", as: :right_ads
 end
