@@ -6,19 +6,8 @@
     <%= render "share/fb_comment_box" %>
   </div>
   <div class="col-md-3">
-    <div>
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <!-- av_banner_category_2 -->
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-1391132134348179"
-           data-ad-slot="2883283840"
-           data-ad-format="auto"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
+    <%= render "share/fb_like_box" %>
+    <%= render "share/right_ads2" %>
     <h4><%= t "labels.other_artists" %></h4>
     <%= render partial: "other_artist", collection: @artists, as: :artist %>
   </div>
