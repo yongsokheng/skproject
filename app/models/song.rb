@@ -25,7 +25,7 @@ class Song < ActiveRecord::Base
   validates :url, presence: true
   validates :image, presence: true
 
-  scope :find_song, ->term{where("keyword LIKE ?", "%#{term}%")}
+  scope :find_song, ->term{where("keyword LIKE ?", "%#{term}%").limit 5}
   scope :find_all_except, ->id, limit{where.not(id: id).limit(limit)}
   scope :top_song, ->limit{order(play_number: :DESC).limit(limit)}
 
