@@ -31,4 +31,11 @@ class SongsController < ApplicationController
     end
     render nothing: true
   end
+
+  def download
+    require "open-uri"
+    song = Song.find params[:id]
+    data = open(song.url).read
+    send_data data, disposition: "attachment", filename: "#{song.kh_title}.mp3"
+  end
 end
