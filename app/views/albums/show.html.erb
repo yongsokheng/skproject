@@ -8,7 +8,12 @@
   <div class="col-md-3">
     <%= render "share/fb_like_box" %>
     <%= render "share/right_ads2" %>
-    <h4><%= t "labels.other_albums" %></h4>
+    <h4>
+      <%= link_to @album.production do %>
+        <%= t "labels.other_albums" %>
+        <span class="glyphicon glyphicon-menu-right icon-more-2"></span>
+      <% end %>
+    </h4>
     <%= render partial: "album_left", collection: @similar_albums, as: :album %>
   </div>
 </div>

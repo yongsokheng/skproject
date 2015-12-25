@@ -5,7 +5,7 @@ var _select = function(e, ui) {
 
 var ui = function(ul, item) {
   var markup = [
-    '<a href="#"><span class="img">',
+    '<a href="/songs/'+ item.id +'"><span class="img">',
       '<img src="' + item.image + '" />',
     '</span>',
     '<span class="title">' + item.kh_title + '</span>',

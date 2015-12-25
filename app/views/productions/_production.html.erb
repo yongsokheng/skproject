@@ -1,5 +1,8 @@
 <h3>
-  <%= link_to production.kh_name, production %>
+  <%= link_to production do %>
+    <%= production.kh_name %>
+    <span class="glyphicon glyphicon-menu-right icon-more"></span>
+  <% end %>
 </h3>
 <hr>
 <div class="row">

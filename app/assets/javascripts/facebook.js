@@ -17,5 +17,6 @@ var facebook = function() {
 }
 
 $(document).ready(function(){
-  facebook();
+  if($(".player").length > 0)
+    facebook();
 });

@@ -1,11 +1,10 @@
-<%= link_to album, class: "production_box" do %>
-  <div class="col-md-3">
+<div class="col-sm-3 production_box">
+  <%= link_to album do %>
     <div class="thumbnail">
       <%= image_tag album.image.url, class: "album-image" %>
-      <div class="btn-play"><%= image_tag "play" %></div>
       <div class="caption">
         <h5><%= album.kh_name %></h5>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

@@ -14,7 +14,7 @@ html, body{
 
 .content{
   background-color: WHITE;
-  padding: 20px 20px 20px 40px;
+  padding: 20px 20px 20px 20px;
   min-height: 100%;
 }
 
@@ -135,12 +135,25 @@ a:hover{
   }
 }
 
+.icon-more {
+  font-size: 0.7em;
+}
+
+.icon-more-2 {
+  font-size: 0.9em;
+}
+
 /** album-box **/
 .thumbnail{
   // -moz-box-shadow:    0px 3px 5px 0px #ccc;
   // -webkit-box-shadow: 0px 3px 5px 0px #ccc;
   // box-shadow:         0px 3px 5px 0px #ccc;
   padding-top: 10px;
+  text-align: center;
+}
+
+.cover-img {
+  padding-bottom: 10px;
 }
 
 .btn-play{

@@ -41,19 +41,27 @@ function loadTrackRepeatStatus() {
 }
 
 function scrollTo(position) {
-  $(".playlist").mCustomScrollbar("scrollTo", position, {
-    scrollEasing:"linear",
-    scrollInertia:200
-  });
+  $(".playlist").scrollTop(position);
 }
 
 function scrollNext(id) {
   var top = $("#song-"+id).offset().top - $(".playlist").offset().top;
   if(top >= 150) {
     if(id == total - 1) {
-      scrollTo("top");
+      scrollTo(0);
     }else {
-      scrollTo("-=200");
+      scrollTo(200);
+    }
+  }
+}
+
+function scrollPrev(id) {
+  var top = $("#song-"+id).offset().top - $(".playlist").offset().top;
+  if(top < 38) {
+    if(id == 0) {
+      scrollTo($(".playlist")[0].scrollHeight);
+    }else {
+      scrollTo(-200);
     }
   }
 }
@@ -62,17 +70,6 @@ function checkPlayerType(total) {
   if(total == 1) {
     $(".btn-next").hide();
     $(".btn-prev").hide();
-  }
-}
-
-function scrollPrev(id) {
-  var top = $("#song-"+id).offset().top - $(".playlist").offset().top;
-  if(top < 38) {
-    if(id == 0) {
-      scrollTo("bottom");
-    }else {
-      scrollTo("+=200");
-    }
   }
 }
 

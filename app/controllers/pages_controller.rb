@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def index
-    @productions = Production.all
+    @productions = Production.order("kh_name ASC")
   end
 
   def right_ads

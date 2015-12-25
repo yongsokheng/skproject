@@ -1,8 +1,8 @@
 <div class="row album-detail">
-  <div class="col-md-2">
-    <%= image_tag @artist.image.url, class: "img-responsive" %>
+  <div class="col-sm-2">
+    <%= image_tag @artist.image.url, class: "img-responsive cover-img" %>
   </div>
-  <div class="col-md-4">
+  <div class="col-sm-8">
     <h4 class="media-heading"><%= @artist.kh_name %></h4>
     <p><%= render "share/social_share" %></p>
   </div>

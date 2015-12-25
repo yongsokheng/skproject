@@ -1,18 +1,19 @@
 <div class="row search-result">
-  <div class="col-md-2 song-image">
+  <div class="col-sm-3 col-md-2 song-image">
     <%= link_to song do %>
       <%= image_tag song.image.url, class: "img-responsive" %>
     <% end %>
   </div>
 
-  <div class="col-md-10 song-result">
+  <div class="col-sm-8 col-md-8 song-result">
     <h4 class="title"><%= link_to song.kh_title, song %></h4>
     <p class="album"><%= link_to song.album.kh_name, song.album %> | <%= get_artist_with_link(song).html_safe %></p>
     <p class="play-number">
-      <i class="fa fa-headphones"></i> <%= number_with_precision song.play_number, precision: 0,
-        delimiter: "," %>
+      <span class="glyphicon glyphicon-headphones"></span> <%= number_with_precision song.play_number, precision: 0, delimiter: "," %>
     </p>
-    <p><span class="fb-like" data-href="<%= song_url(song.id) %>" data-width="100%" data-layout="  button_count" data-action="like" data-show-faces="false" data-share="true"></span>
-    <span></p>
+    <p><span class="fb-like" data-href="<%= song_url(song.id) %>" data-width="100%" data-layout="  button_count" data-action="like" data-show-faces="false" data-share="true"></span></p>
   </div>
 </div>
+
+<!-- only for load fb-sdk -->
+<div class="player"></div>
