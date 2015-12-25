@@ -14,7 +14,5 @@
     <span class="fb-share-button" data-href="<%= song_url(song.id) %>" data-layout="button_count"></span>
   </td>
   <td width="5%"><%= link_to "", song_path(song), class: "glyphicon glyphicon-headphones", title: t("labels.listen") if @songs.count > 1 %></td>
-  <td width="5%"><%= link_to "", song.url, class: "glyphicon glyphicon-save btn-download",
-    title: t("labels.download"),
-    target: "_blank" %></td>
+  <td width="5%"><%= link_to "", download_path(song.id), class: "glyphicon glyphicon-save btn-download", title: t("labels.download"), target: "_blank" %></td>
 </tr>
