@@ -4,5 +4,6 @@ class PagesController < ApplicationController
   end
 
   def right_ads
+    render layout: "application_v2"
   end
 end
