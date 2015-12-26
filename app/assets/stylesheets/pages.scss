@@ -10,6 +10,11 @@ html, body{
 
 .header{
   margin-bottom: 60px;
+
+  .logo {
+    position: relative;
+    top: -8px;
+  }
 }
 
 .content{
