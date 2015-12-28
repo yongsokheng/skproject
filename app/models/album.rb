@@ -12,7 +12,7 @@ class Album < ActiveRecord::Base
   validates :kh_name, presence: true
   validates :production_id, presence: true
 
-  scope :find_all_except, ->id, limit{where.not(id: id).limit(limit)}
+  scope :find_all_except, ->id, limit{where.not(id: id).order("kh_name DESC").limit(limit)}
   scope :latest, ->limit{order(kh_name: :DESC).limit(limit)}
 
   def name

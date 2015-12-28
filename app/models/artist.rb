@@ -11,7 +11,7 @@ class Artist < ActiveRecord::Base
   validates :kh_name, presence: true
   validates :image, presence: true
 
-  scope :find_all_except, ->id, limit{where.not(id: id).limit(limit)}
+  scope :find_all_except, ->id, limit{where.not(id: id).order("kh_name ASC").limit(limit)}
 
   def name
     kh_name
