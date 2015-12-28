@@ -8,11 +8,13 @@ module RailsAdminProduction
         field :id
         field :kh_name
         field :en_name
+        field :order_id
         field :image
       end
       show do
         field :kh_name
         field :en_name
+        field :order_id
         field :image
         field :created_at
         field :updated_at
@@ -20,6 +22,7 @@ module RailsAdminProduction
       edit do
         field :kh_name
         field :en_name
+        field :order_id
         field :description
         field :image
       end

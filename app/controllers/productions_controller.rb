@@ -1,6 +1,6 @@
 class ProductionsController < ApplicationController
   def index
-    @productions = Production.order("kh_name ASC").page(params[:page])
+    @productions = Production.order("order_id ASC").page(params[:page])
   end
 
   def show

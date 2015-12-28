@@ -9,6 +9,7 @@ class Production < ActiveRecord::Base
   validates :en_name, presence: true
   validates :kh_name, presence: true
   validates :image, presence: true
+  validates :order_id, presence: true
 
   def name
     kh_name
